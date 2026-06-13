@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>StartupClarity — Strategy Consulting for Founders</title>
-<meta name="description" content="StartupClarity helps early-stage startup founders build focused strategy, go-to-market plans, and make decisions that drive real growth." />
+<title>StartupClarity — Strategy Consulting by Shreya Chowdhury</title>
+<meta name="description" content="StartupClarity by Shreya Chowdhury helps early-stage startup founders build focused strategy, go-to-market plans, and make decisions that drive real growth." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet" />
@@ -297,6 +297,65 @@
     .testimonials-section, .services-section, .booking-section, .dashboard-section { padding: 36px 16px; }
   }
 
+  /* ── UPI MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.45);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white); border-radius: var(--radius-xl);
+    padding: 28px; max-width: 340px; width: 90%; text-align: center;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: none; border: none; font-size: 20px; cursor: pointer;
+    color: var(--gray-500); line-height: 1;
+  }
+  .modal-close:hover { color: var(--black); }
+  .modal-box h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .modal-box .modal-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 18px; }
+  .upi-qr-wrap {
+    background: var(--gray-50); border-radius: var(--radius-lg);
+    padding: 16px; margin-bottom: 14px; display: inline-block;
+  }
+  .upi-qr-wrap img { width: 180px; height: 180px; display: block; }
+  .upi-id-box {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--gray-50); border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 14px;
+    gap: 10px;
+  }
+  .upi-id-box span { font-size: 13px; font-weight: 500; font-family: monospace; color: var(--black); }
+  .copy-btn {
+    padding: 4px 10px; font-size: 11px; font-weight: 500;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-sm);
+    background: var(--white); cursor: pointer; color: var(--gray-800);
+    white-space: nowrap; transition: background .12s;
+  }
+  .copy-btn:hover { background: var(--gray-100); }
+  .upi-apps { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
+  .upi-app-link {
+    padding: 6px 12px; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-md);
+    text-decoration: none; color: var(--gray-800); background: var(--white);
+    transition: background .12s;
+  }
+  .upi-app-link:hover { background: var(--gray-50); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--gray-100); padding: 24px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer p { font-size: 12px; color: var(--gray-500); }
+  footer a { color: var(--teal-600); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; gap: 16px; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
@@ -323,7 +382,7 @@
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <div class="hero-eyebrow"><span></span>Strategy consulting for early-stage founders</div>
+    <div class="hero-eyebrow"><span></span>Strategy consulting by Shreya Chowdhury</div>
     <h1>Stop guessing.<br><em>Start growing</em> with clarity.</h1>
     <p>StartupClarity helps founders at the $0–$2M stage cut through the noise, build focused strategy, and make the decisions that actually move the needle.</p>
     <div class="hero-actions">
@@ -381,7 +440,10 @@
         <p>Not sure where to start?</p>
         <span>Book a free 30-min discovery call — no pitch, no pressure.</span>
       </div>
-      <a href="#" class="btn-primary" onclick="showPage('booking')">Get started free</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="mailto:shreyachowdhury831@gmail.com" class="btn-ghost" style="font-size:13px;padding:9px 18px">Email Shreya</a>
+        <a href="#" class="btn-primary" onclick="showPage('booking');return false;">Get started free</a>
+      </div>
     </div>
   </div>
 </div>
@@ -451,7 +513,8 @@
           Cancel or pause anytime — no long-term lock-in
         </div>
       </div>
-      <a href="#" class="btn-primary" style="display:inline-block;margin-top:18px;font-size:13px" onclick="showPage('booking')">Book free discovery call</a>
+      <a href="#" class="btn-primary" style="display:inline-block;margin-top:18px;font-size:13px" onclick="showPage('booking');return false;">Book free discovery call</a>
+      <button class="btn-ghost" style="margin-top:10px;font-size:13px;padding:9px 18px" onclick="openUPI()">Pay via UPI</button>
     </div>
   </div>
 </div>
@@ -465,6 +528,10 @@
     <div class="confirm-banner" id="confirmBanner">
       <h3>✓ You're booked!</h3>
       <p id="confirmMsg">A calendar invite is heading your way.</p>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <a href="mailto:shreyachowdhury831@gmail.com?subject=Discovery call booking" class="btn-primary" style="font-size:13px;padding:8px 16px">Email Shreya</a>
+        <button class="btn-ghost" style="font-size:13px;padding:8px 16px" onclick="openUPI()">Pay for a session via UPI</button>
+      </div>
     </div>
 
     <div id="bookingForm">
@@ -541,7 +608,7 @@
         </div>
         <span class="badge badge-new">New</span>
         <div class="pip-btns">
-          <button class="pip-btn">Reply</button>
+          <a href="mailto:shreyachowdhury831@gmail.com?subject=Re: Sarah Reynolds inquiry" class="pip-btn">Reply</a>
           <button class="pip-btn primary" onclick="showPage('booking')">Book</button>
         </div>
       </div>
@@ -552,7 +619,7 @@
           <p class="pip-meta">Fintech · GTM advisory · Booked Mon 10 AM</p>
         </div>
         <span class="badge badge-booked">Booked</span>
-        <div class="pip-btns"><button class="pip-btn">View</button></div>
+        <div class="pip-btns"><a href="mailto:shreyachowdhury831@gmail.com?subject=Re: Marcus Park session" class="pip-btn">View</a></div>
       </div>
       <div class="pipeline-row">
         <div class="avatar" style="background:var(--amber-50);color:var(--amber-600)">LN</div>
@@ -561,7 +628,7 @@
           <p class="pip-meta">EdTech · Fractional CSO · Proposal sent</p>
         </div>
         <span class="badge badge-pending">Pending</span>
-        <div class="pip-btns"><button class="pip-btn">Follow up</button></div>
+        <div class="pip-btns"><a href="mailto:shreyachowdhury831@gmail.com?subject=Follow up: Lena Novak proposal" class="pip-btn">Follow up</a></div>
       </div>
       <div class="pipeline-row">
         <div class="avatar" style="background:var(--blue-50);color:var(--blue-800)">JT</div>
@@ -571,18 +638,56 @@
         </div>
         <span class="badge badge-new">New</span>
         <div class="pip-btns">
-          <button class="pip-btn">Reply</button>
+          <a href="mailto:shreyachowdhury831@gmail.com?subject=Re: James Torres inquiry" class="pip-btn">Reply</a>
           <button class="pip-btn primary" onclick="showPage('booking')">Book</button>
         </div>
       </div>
     </div>
 
     <div class="dash-footer">
-      <p>Your booking link: <a href="#">startupclarity.com/book</a></p>
-      <button class="pip-btn" style="font-size:12px" onclick="copyLink()">Copy link</button>
+      <p>Contact: <a href="mailto:shreyachowdhury831@gmail.com">shreyachowdhury831@gmail.com</a></p>
+      <div style="display:flex;gap:8px">
+        <button class="pip-btn" onclick="openUPI()">Pay via UPI</button>
+        <button class="pip-btn" style="font-size:12px" onclick="copyLink()">Copy booking link</button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- UPI PAYMENT MODAL -->
+<div class="modal-overlay" id="upiModal" onclick="closeUPIOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeUPI()" aria-label="Close">×</button>
+    <h3>Pay Shreya via UPI</h3>
+    <p class="modal-sub">Scan with any UPI app or copy the UPI ID below</p>
+    <div class="upi-qr-wrap">
+      <img src="GooglePay_QR.PNG" alt="Google Pay QR code for shreyachowdhury831@oksbi" onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='block'" />
+      <div id="qr-fallback" style="display:none;width:180px;height:180px;background:var(--gray-100);border-radius:8px;display:none;align-items:center;justify-content:center;font-size:12px;color:var(--gray-500)">QR image not found</div>
+    </div>
+    <div class="upi-id-box">
+      <span id="upiIdText">shreyachowdhury831@oksbi</span>
+      <button class="copy-btn" onclick="copyUPI()">Copy</button>
+    </div>
+    <p style="font-size:12px;color:var(--gray-500);margin-bottom:10px">Or open directly in your UPI app</p>
+    <div class="upi-apps">
+      <a href="upi://pay?pa=shreyachowdhury831@oksbi&pn=Shreya%20Chowdhury&cu=INR" class="upi-app-link">GPay</a>
+      <a href="upi://pay?pa=shreyachowdhury831@oksbi&pn=Shreya%20Chowdhury&cu=INR" class="upi-app-link">PhonePe</a>
+      <a href="upi://pay?pa=shreyachowdhury831@oksbi&pn=Shreya%20Chowdhury&cu=INR" class="upi-app-link">Paytm</a>
+      <a href="upi://pay?pa=shreyachowdhury831@oksbi&pn=Shreya%20Chowdhury&cu=INR" class="upi-app-link">BHIM</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 StartupClarity · <a href="mailto:shreyachowdhury831@gmail.com">shreyachowdhury831@gmail.com</a></p>
+  <div class="footer-links">
+    <a href="mailto:shreyachowdhury831@gmail.com">Contact</a>
+    <a href="#" onclick="showPage('services');return false;">Services</a>
+    <a href="#" onclick="showPage('booking');return false;">Book a call</a>
+    <button class="copy-btn" onclick="openUPI()">Pay via UPI</button>
+  </div>
+</footer>
 
 <script>
   function showPage(id) {
@@ -611,17 +716,41 @@
     const banner = document.getElementById('confirmBanner');
     banner.style.display = 'block';
     document.getElementById('confirmMsg').textContent =
-      'Confirmed for ' + slot.textContent + ' EST. A calendar invite is heading to ' + email + '.';
+      'Confirmed for ' + slot.textContent + ' IST. Shreya will send a calendar invite to ' + email + '.';
     const form = document.getElementById('bookingForm');
     form.style.opacity = '0.35';
     form.style.pointerEvents = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = 'mailto:shreyachowdhury831@gmail.com?subject=New booking: ' + encodeURIComponent(name) + ' — ' + encodeURIComponent(slot.textContent) + '&body=Name: ' + encodeURIComponent(name) + '%0AEmail: ' + encodeURIComponent(email) + '%0ASlot: ' + encodeURIComponent(slot.textContent);
   }
 
   function copyLink() {
     navigator.clipboard.writeText('https://startupclarity.com/book')
       .then(() => alert('Booking link copied!'))
       .catch(() => alert('startupclarity.com/book'));
+  }
+
+  function openUPI() {
+    document.getElementById('upiModal').classList.add('open');
+  }
+
+  function closeUPI() {
+    document.getElementById('upiModal').classList.remove('open');
+  }
+
+  function closeUPIOutside(e) {
+    if (e.target === document.getElementById('upiModal')) closeUPI();
+  }
+
+  function copyUPI() {
+    const id = 'shreyachowdhury831@oksbi';
+    navigator.clipboard.writeText(id)
+      .then(() => {
+        const btn = document.querySelector('.upi-id-box .copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      })
+      .catch(() => alert(id));
   }
 </script>
 </body>
