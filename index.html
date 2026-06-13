@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StartupClarity — Strategy Consulting for Founders</title>
+<meta name="description" content="StartupClarity helps early-stage startup founders build focused strategy, go-to-market plans, and make decisions that drive real growth." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-50:  #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --teal-900: #04342C;
+    --purple-50: #EEEDFE;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --amber-50: #FAEEDA;
+    --amber-400: #BA7517;
+    --amber-600: #854F0B;
+    --blue-50: #E6F1FB;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --gray-50: #F7F7F5;
+    --gray-100: #EDEDEA;
+    --gray-300: #C4C4BF;
+    --gray-500: #888780;
+    --gray-800: #2C2C2A;
+    --white: #FFFFFF;
+    --black: #1A1A18;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 60px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 15px; font-weight: 600; color: var(--black); text-decoration: none;
+  }
+  .logo-mark {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--teal-400); display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 16px; height: 16px; stroke: white; stroke-width: 2.5; fill: none; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a {
+    padding: 6px 14px; font-size: 13px; color: var(--gray-500);
+    text-decoration: none; border-radius: var(--radius-sm);
+    transition: color .15s, background .15s;
+  }
+  .nav-links a:hover { color: var(--black); background: var(--gray-50); }
+  .nav-links a.active { color: var(--black); font-weight: 500; }
+  .nav-cta {
+    padding: 8px 18px; font-size: 13px; font-weight: 500;
+    background: var(--teal-400); color: white;
+    border: none; border-radius: var(--radius-md); cursor: pointer;
+    text-decoration: none; transition: background .15s;
+  }
+  .nav-cta:hover { background: var(--teal-600); }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 32px 64px;
+    max-width: 680px; margin: 0 auto; text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--teal-50); color: var(--teal-800);
+    padding: 5px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 500; margin-bottom: 22px;
+  }
+  .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-400); }
+  .hero h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 48px; font-weight: 300; line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 18px; color: var(--black);
+  }
+  .hero h1 em { font-style: italic; color: var(--teal-400); }
+  .hero p { font-size: 16px; color: var(--gray-500); line-height: 1.75; margin-bottom: 30px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .hero-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 11px 24px; font-size: 14px; font-weight: 500;
+    background: var(--teal-400); color: white;
+    border: none; border-radius: var(--radius-md); cursor: pointer;
+    text-decoration: none; transition: background .15s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-600); }
+  .btn-ghost {
+    padding: 11px 24px; font-size: 14px; font-weight: 500;
+    background: transparent; color: var(--black);
+    border: 1px solid var(--gray-300); border-radius: var(--radius-md); cursor: pointer;
+    text-decoration: none; transition: border-color .15s, background .15s; display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--gray-50); border-color: var(--gray-500); }
+
+  .trust-strip {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+    padding: 18px 32px;
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .trust-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--gray-500); }
+  .trust-item svg { width: 14px; height: 14px; stroke: var(--teal-400); stroke-width: 2.5; fill: none; flex-shrink: 0; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { padding: 56px 32px; max-width: 760px; margin: 0 auto; }
+  .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-400); margin-bottom: 10px; }
+  .section-title { font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 300; line-height: 1.3; margin-bottom: 32px; }
+  .tcard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tcard {
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg); padding: 22px;
+  }
+  .tcard blockquote { font-size: 14px; line-height: 1.75; color: var(--gray-800); margin-bottom: 16px; font-style: italic; }
+  .tcard-name { font-size: 13px; font-weight: 600; }
+  .tcard-role { font-size: 12px; color: var(--gray-500); }
+  .cta-strip {
+    background: var(--teal-50); border-radius: var(--radius-lg);
+    padding: 24px 28px; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin-top: 32px;
+  }
+  .cta-strip p { font-size: 14px; font-weight: 500; }
+  .cta-strip span { font-size: 13px; color: var(--teal-600); display: block; margin-top: 2px; }
+
+  /* ── SERVICES ── */
+  .services-section { padding: 56px 32px; max-width: 760px; margin: 0 auto; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .svc-card {
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg); padding: 20px;
+    transition: border-color .15s, transform .15s;
+  }
+  .svc-card:hover { border-color: var(--teal-100); transform: translateY(-2px); }
+  .svc-card.featured { border: 2px solid var(--teal-400); }
+  .featured-badge {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    background: var(--teal-50); color: var(--teal-800);
+    padding: 3px 9px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .svc-icon {
+    width: 38px; height: 38px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .svc-icon svg { width: 20px; height: 20px; stroke-width: 1.8; fill: none; }
+  .svc-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+  .svc-card p { font-size: 13px; color: var(--gray-500); line-height: 1.65; }
+  .svc-price { font-size: 16px; font-weight: 600; color: var(--teal-600); margin-top: 14px; }
+  .svc-freq { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+
+  .includes-box {
+    background: var(--gray-50); border-radius: var(--radius-lg);
+    padding: 20px 24px; max-width: 460px;
+  }
+  .includes-box h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .includes-list { display: flex; flex-direction: column; gap: 8px; }
+  .includes-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--gray-500); }
+  .includes-item svg { width: 14px; height: 14px; stroke: var(--teal-400); stroke-width: 2.5; fill: none; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── BOOKING ── */
+  .booking-section { padding: 56px 32px; max-width: 520px; margin: 0 auto; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--gray-800); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 13px; font-size: 14px;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-md);
+    background: var(--white); color: var(--black); font-family: inherit;
+    transition: border-color .15s, box-shadow .15s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--teal-400); box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 84px; }
+  .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+  .slot-btn {
+    padding: 9px 6px; text-align: center; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-md);
+    background: var(--white); color: var(--gray-800); cursor: pointer;
+    transition: all .15s;
+  }
+  .slot-btn:hover { border-color: var(--teal-400); background: var(--teal-50); }
+  .slot-btn.selected { border-color: var(--teal-400); background: var(--teal-50); color: var(--teal-800); }
+  .submit-btn {
+    width: 100%; padding: 12px; font-size: 14px; font-weight: 600;
+    background: var(--teal-400); color: white; border: none;
+    border-radius: var(--radius-md); cursor: pointer; margin-top: 8px;
+    transition: background .15s;
+  }
+  .submit-btn:hover { background: var(--teal-600); }
+  .confirm-banner {
+    display: none; background: var(--teal-50); border: 1px solid var(--teal-100);
+    border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 24px;
+  }
+  .confirm-banner h3 { font-size: 15px; font-weight: 600; color: var(--teal-800); margin-bottom: 5px; }
+  .confirm-banner p { font-size: 13px; color: var(--teal-600); }
+
+  /* ── DASHBOARD ── */
+  .dashboard-section { padding: 32px; max-width: 780px; margin: 0 auto; }
+  .dash-header { margin-bottom: 24px; }
+  .dash-header h2 { font-size: 20px; font-weight: 600; }
+  .dash-header p { font-size: 13px; color: var(--gray-500); margin-top: 3px; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .metric-card { background: var(--gray-50); border-radius: var(--radius-md); padding: 16px; }
+  .metric-card .m-label { font-size: 12px; color: var(--gray-500); margin-bottom: 6px; }
+  .metric-card .m-value { font-size: 26px; font-weight: 600; line-height: 1; }
+  .metric-card .m-delta { font-size: 11px; margin-top: 5px; display: flex; align-items: center; gap: 3px; }
+  .m-delta.up { color: var(--teal-400); }
+  .m-delta.flat { color: var(--gray-500); }
+  .pipeline-table {
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px;
+  }
+  .pipeline-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px; border-bottom: 1px solid var(--gray-100);
+    transition: background .1s;
+  }
+  .pipeline-row:last-child { border-bottom: none; }
+  .pipeline-row:hover { background: var(--gray-50); }
+  .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; flex-shrink: 0;
+  }
+  .pip-info { flex: 1; min-width: 0; }
+  .pip-name { font-size: 13px; font-weight: 500; }
+  .pip-meta { font-size: 11px; color: var(--gray-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .badge {
+    font-size: 11px; font-weight: 500; padding: 3px 9px;
+    border-radius: 100px; white-space: nowrap;
+  }
+  .badge-new { background: var(--blue-50); color: var(--blue-800); }
+  .badge-booked { background: var(--teal-50); color: var(--teal-800); }
+  .badge-pending { background: var(--amber-50); color: var(--amber-600); }
+  .pip-btns { display: flex; gap: 6px; }
+  .pip-btn {
+    padding: 5px 10px; font-size: 11px; font-weight: 500;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-sm);
+    background: transparent; color: var(--gray-800); cursor: pointer;
+    transition: background .12s;
+  }
+  .pip-btn:hover { background: var(--gray-50); }
+  .pip-btn.primary { background: var(--teal-50); border-color: var(--teal-100); color: var(--teal-800); }
+  .pip-btn.primary:hover { background: var(--teal-100); }
+  .dash-footer {
+    background: var(--gray-50); border-radius: var(--radius-lg);
+    padding: 14px 18px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .dash-footer p { font-size: 13px; color: var(--gray-500); }
+  .dash-footer a { color: var(--teal-600); text-decoration: none; font-weight: 500; }
+  .dash-footer a:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { padding: 48px 20px 40px; }
+    .hero h1 { font-size: 32px; }
+    .tcard-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; }
+    .slots-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-section, .services-section, .booking-section, .dashboard-section { padding: 36px 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo" onclick="showPage('home')">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16"><polyline points="2,10 6,6 9,9 14,4"/></svg>
+    </div>
+    StartupClarity
+  </a>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a href="#" onclick="showPage('services')" id="nav-services">Services</a>
+    <a href="#" onclick="showPage('booking')" id="nav-booking">Book a call</a>
+    <a href="#" onclick="showPage('dashboard')" id="nav-dashboard">Dashboard</a>
+  </div>
+  <a href="#" class="nav-cta" onclick="showPage('booking')">Book free call</a>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow"><span></span>Strategy consulting for early-stage founders</div>
+    <h1>Stop guessing.<br><em>Start growing</em> with clarity.</h1>
+    <p>StartupClarity helps founders at the $0–$2M stage cut through the noise, build focused strategy, and make the decisions that actually move the needle.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="showPage('booking')">Book a free 30-min call</a>
+      <a href="#" class="btn-ghost" onclick="showPage('services')">See services & pricing</a>
+    </div>
+  </div>
+
+  <div class="trust-strip">
+    <div class="trust-item">
+      <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+      40+ startups advised
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+      Avg. 3× revenue in 6 months
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+      Reply within 24 hrs
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+      No retainer lock-in
+    </div>
+  </div>
+
+  <div class="testimonials-section">
+    <p class="section-eyebrow">What founders say</p>
+    <p class="section-title">Real results from real founders</p>
+    <div class="tcard-grid">
+      <div class="tcard">
+        <blockquote>"We went from spinning our wheels to closing our seed round in 8 weeks. Best investment we made as a company."</blockquote>
+        <p class="tcard-name">Arjun Mehta</p>
+        <p class="tcard-role">Co-founder, Stackly</p>
+      </div>
+      <div class="tcard">
+        <blockquote>"Finally, direct answers instead of endless frameworks. Our GTM is completely transformed. Worth every dollar."</blockquote>
+        <p class="tcard-name">Priya Nair</p>
+        <p class="tcard-role">CEO, Launchpad AI</p>
+      </div>
+      <div class="tcard">
+        <blockquote>"I came in with three competing priorities and no idea where to start. Left with a 90-day plan and the confidence to execute it."</blockquote>
+        <p class="tcard-name">Marcus Park</p>
+        <p class="tcard-role">Founder, Finlo</p>
+      </div>
+      <div class="tcard">
+        <blockquote>"The fractional CSO retainer is the highest-leverage thing on our budget. Strategic clarity without a full-time hire."</blockquote>
+        <p class="tcard-name">Lena Novak</p>
+        <p class="tcard-role">CEO, LearnWave</p>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <div>
+        <p>Not sure where to start?</p>
+        <span>Book a free 30-min discovery call — no pitch, no pressure.</span>
+      </div>
+      <a href="#" class="btn-primary" onclick="showPage('booking')">Get started free</a>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services">
+  <div class="services-section">
+    <p class="section-eyebrow">Services & pricing</p>
+    <p class="section-title">Pick the engagement that fits your stage</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon" style="background:var(--teal-50)">
+          <svg viewBox="0 0 20 20" stroke="var(--teal-600)"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z"/><path d="M10 6v4l3 3"/></svg>
+        </div>
+        <h3>Discovery call</h3>
+        <p>30-min free conversation to understand your challenge. No pitch — just honest advice.</p>
+        <p class="svc-price">Free</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:var(--purple-50)">
+          <svg viewBox="0 0 20 20" stroke="var(--purple-600)"><path d="M9 2H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V9"/><polyline points="9,2 9,9 16,9"/><line x1="12" y1="4" x2="20" y2="4"/><line x1="16" y1="0" x2="16" y2="8"/></svg>
+        </div>
+        <h3>Advisory session</h3>
+        <p>60-min focused session on your most pressing problem. Leaves you with a clear action plan.</p>
+        <p class="svc-price">$97 <span class="svc-freq">/ session</span></p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:var(--amber-50)">
+          <svg viewBox="0 0 20 20" stroke="var(--amber-600)"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>GTM advisory</h3>
+        <p>Full go-to-market playbook for your first 100 customers — positioning, channels, pricing, messaging.</p>
+        <p class="svc-price">$1,500 <span class="svc-freq">/ project</span></p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon" style="background:var(--blue-50)">
+          <svg viewBox="0 0 20 20" stroke="var(--blue-600)"><circle cx="10" cy="10" r="3"/><path d="M10 1v3M10 16v3M1 10h3M16 10h3"/></svg>
+        </div>
+        <h3>Strategy sprint</h3>
+        <p>2-week intensive to set your 12-month direction, cut noise, and align your team around what matters.</p>
+        <p class="svc-price">$900 <span class="svc-freq">/ sprint</span></p>
+      </div>
+      <div class="svc-card featured">
+        <span class="featured-badge">Most popular</span>
+        <div class="svc-icon" style="background:var(--teal-50)">
+          <svg viewBox="0 0 20 20" stroke="var(--teal-600)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Fractional CSO</h3>
+        <p>Monthly retainer. I work as your part-time Chief Strategy Officer — on-call, accountable, aligned with your goals.</p>
+        <p class="svc-price">$600 <span class="svc-freq">/ month</span></p>
+      </div>
+    </div>
+
+    <div class="includes-box">
+      <h4>All engagements include</h4>
+      <div class="includes-list">
+        <div class="includes-item">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+          Async Slack or WhatsApp access between sessions
+        </div>
+        <div class="includes-item">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+          Written summary and action items after every call
+        </div>
+        <div class="includes-item">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg>
+          Cancel or pause anytime — no long-term lock-in
+        </div>
+      </div>
+      <a href="#" class="btn-primary" style="display:inline-block;margin-top:18px;font-size:13px" onclick="showPage('booking')">Book free discovery call</a>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING PAGE -->
+<div class="page" id="page-booking">
+  <div class="booking-section">
+    <p class="section-eyebrow">Book a call</p>
+    <p class="section-title" style="margin-bottom:28px">Free 30-min discovery call</p>
+
+    <div class="confirm-banner" id="confirmBanner">
+      <h3>✓ You're booked!</h3>
+      <p id="confirmMsg">A calendar invite is heading your way.</p>
+    </div>
+
+    <div id="bookingForm">
+      <div class="form-group">
+        <label>Your name</label>
+        <input type="text" id="f-name" placeholder="e.g. Sarah Chen" />
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" id="f-email" placeholder="you@startup.com" />
+      </div>
+      <div class="form-group">
+        <label>Your startup — what do you do?</label>
+        <input type="text" id="f-startup" placeholder="e.g. B2B SaaS for HR teams" />
+      </div>
+      <div class="form-group">
+        <label>Biggest challenge right now</label>
+        <textarea id="f-challenge" placeholder="e.g. We're not sure which market to prioritize first…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Pick a time slot (EST)</label>
+        <div class="slots-grid">
+          <button class="slot-btn" onclick="pickSlot(this)">Mon 10:00 AM</button>
+          <button class="slot-btn" onclick="pickSlot(this)">Mon 3:00 PM</button>
+          <button class="slot-btn" onclick="pickSlot(this)">Tue 11:00 AM</button>
+          <button class="slot-btn" onclick="pickSlot(this)">Wed 10:00 AM</button>
+          <button class="slot-btn" onclick="pickSlot(this)">Thu 4:00 PM</button>
+          <button class="slot-btn" onclick="pickSlot(this)">Fri 11:00 AM</button>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitBooking()">Confirm my free call →</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD PAGE -->
+<div class="page" id="page-dashboard">
+  <div class="dashboard-section">
+    <div class="dash-header">
+      <h2>Dashboard</h2>
+      <p>Your client pipeline at a glance</p>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <p class="m-label">New inquiries</p>
+        <p class="m-value">12</p>
+        <p class="m-delta up">↑ +4 this week</p>
+      </div>
+      <div class="metric-card">
+        <p class="m-label">Calls booked</p>
+        <p class="m-value">5</p>
+        <p class="m-delta up">↑ 2 this week</p>
+      </div>
+      <div class="metric-card">
+        <p class="m-label">Active clients</p>
+        <p class="m-value">3</p>
+        <p class="m-delta flat">— Stable</p>
+      </div>
+      <div class="metric-card">
+        <p class="m-label">Monthly revenue</p>
+        <p class="m-value">$3,891</p>
+        <p class="m-delta up">↑ +$600</p>
+      </div>
+    </div>
+
+    <p style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-500);margin-bottom:12px">Client pipeline</p>
+    <div class="pipeline-table">
+      <div class="pipeline-row">
+        <div class="avatar" style="background:var(--teal-50);color:var(--teal-800)">SR</div>
+        <div class="pip-info">
+          <p class="pip-name">Sarah Reynolds</p>
+          <p class="pip-meta">SaaS · Strategy sprint inquiry · 2h ago</p>
+        </div>
+        <span class="badge badge-new">New</span>
+        <div class="pip-btns">
+          <button class="pip-btn">Reply</button>
+          <button class="pip-btn primary" onclick="showPage('booking')">Book</button>
+        </div>
+      </div>
+      <div class="pipeline-row">
+        <div class="avatar" style="background:var(--purple-50);color:var(--purple-800)">MP</div>
+        <div class="pip-info">
+          <p class="pip-name">Marcus Park</p>
+          <p class="pip-meta">Fintech · GTM advisory · Booked Mon 10 AM</p>
+        </div>
+        <span class="badge badge-booked">Booked</span>
+        <div class="pip-btns"><button class="pip-btn">View</button></div>
+      </div>
+      <div class="pipeline-row">
+        <div class="avatar" style="background:var(--amber-50);color:var(--amber-600)">LN</div>
+        <div class="pip-info">
+          <p class="pip-name">Lena Novak</p>
+          <p class="pip-meta">EdTech · Fractional CSO · Proposal sent</p>
+        </div>
+        <span class="badge badge-pending">Pending</span>
+        <div class="pip-btns"><button class="pip-btn">Follow up</button></div>
+      </div>
+      <div class="pipeline-row">
+        <div class="avatar" style="background:var(--blue-50);color:var(--blue-800)">JT</div>
+        <div class="pip-info">
+          <p class="pip-name">James Torres</p>
+          <p class="pip-meta">D2C brand · Advisory session · Yesterday</p>
+        </div>
+        <span class="badge badge-new">New</span>
+        <div class="pip-btns">
+          <button class="pip-btn">Reply</button>
+          <button class="pip-btn primary" onclick="showPage('booking')">Book</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-footer">
+      <p>Your booking link: <a href="#">startupclarity.com/book</a></p>
+      <button class="pip-btn" style="font-size:12px" onclick="copyLink()">Copy link</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    const pages = ['home','services','booking','dashboard'];
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === id);
+      const navEl = document.getElementById('nav-' + p);
+      if (navEl) navEl.classList.toggle('active', p === id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  function pickSlot(el) {
+    document.querySelectorAll('.slot-btn').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function submitBooking() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const slot = document.querySelector('.slot-btn.selected');
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+    if (!slot) { alert('Please pick a time slot.'); return; }
+    const banner = document.getElementById('confirmBanner');
+    banner.style.display = 'block';
+    document.getElementById('confirmMsg').textContent =
+      'Confirmed for ' + slot.textContent + ' EST. A calendar invite is heading to ' + email + '.';
+    const form = document.getElementById('bookingForm');
+    form.style.opacity = '0.35';
+    form.style.pointerEvents = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText('https://startupclarity.com/book')
+      .then(() => alert('Booking link copied!'))
+      .catch(() => alert('startupclarity.com/book'));
+  }
+</script>
+</body>
+</html>
